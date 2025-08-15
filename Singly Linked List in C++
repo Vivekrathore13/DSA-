@@ -1,0 +1,148 @@
+Implemnetation of Singly Linked List
+
+#include<iostream>
+using namespace std;
+
+class Node{
+  public:
+        int data; //it is actual value we insert
+        Node* next;// it is pointer which help us to insert the value
+  Node(int val){
+    data=val;
+    next= NULL;
+  }
+};
+
+class list{
+      Node* head;// these is first pointer which store first node address
+      Node* tail; //track the new node
+public:
+      list(){
+        head=tail=NULL; //these shows the linked list is empty
+      }
+
+      // pushfront first function which insert the data at front of linked list
+
+      void pushfront(int val){
+       Node* newnode= new Node(val); //dyanmic syantax because of new keyword
+       //another syntax but its create static then after push the new value it loose the original value so its is not work
+       // Node* newNode(val); //static
+
+       //first case if linked list is empty
+       if(head==NULL){
+        head=tail=newnode;
+        return;
+       }
+       // if it is not null then
+       else{
+        newnode->next=head;
+        head=newnode;
+       }
+      }
+
+      //pushback in linked list
+      void pushback(int val){
+       Node* newnode= new Node(val); //dyanmic syantax because of new keyword
+       if(head==NULL){
+        head=tail=newnode;
+        return;
+       }
+       // if it is not null then
+       else{
+        tail->next=newnode;
+        tail=newnode;
+       }
+      }
+      
+      // pop front in linked list
+
+      void popfront(){
+        if(head==NULL){
+            cout<<"linked list is empty"<<endl;
+            return;
+        }
+           Node* temp=head;
+           head=head->next;
+           temp->next=NULL;
+           delete temp;
+      }
+ // pop back in linked list
+
+      void popback(){
+        if(head==NULL){
+            cout<<"linked list is empty"<<endl;
+            return;
+        }
+        Node* temp=head;
+
+        while(temp->next!=tail){
+            temp=temp->next;
+        }
+        temp->next=NULL;
+        delete tail;
+        tail=temp;
+      }
+
+      void insertmid(int val,int pos){
+        if(pos<0){
+            cout<<"invalid"<<endl;
+            return;
+        }
+        if(pos==0){
+            pushfront(val);
+            return;
+        }
+        Node* temp= head;
+        for(int i=0;i<pos-1;i++){
+            if(temp==NULL){
+                cout<<"invalid pos\n";
+                return;
+            }
+            temp=temp->next;
+        }
+        Node* newnode=new Node(val);
+        newnode->next=temp->next;
+        temp->next=newnode;
+      }
+
+
+      void printll(){
+        Node* temp= head;
+
+        while(temp!=NULL){
+            cout<<temp->data<<"->";
+            temp=temp->next;
+        }
+        cout<<"NULL"<<endl;
+      }
+
+      int search(int key){
+        Node* temp=head;
+        int idx=0;
+
+        while(temp!=NULL){
+            if(temp->data==key){
+            return idx;
+          }
+          temp=temp->next;
+          idx++;
+        }
+        return -1;
+      }
+};
+int main(){
+ list ll;
+ ll.pushfront(1);
+ ll.pushfront(2);
+ ll.pushfront(3);
+ ll.pushback(2);
+ ll.pushback(3);
+
+ ll.printll();
+ ll.popfront();
+ ll.printll();
+ ll.popback();
+ ll.printll();
+
+ cout<<ll.search(1)<<endl;
+}
