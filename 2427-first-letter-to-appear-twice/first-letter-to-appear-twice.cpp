@@ -10,6 +10,6 @@ public:
             }
         }
         
-        return ' '; // fallback (should never hit in valid input)
+        return ' '; 
     }
 };
