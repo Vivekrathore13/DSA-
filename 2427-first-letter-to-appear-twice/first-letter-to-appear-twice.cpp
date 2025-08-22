@@ -5,7 +5,7 @@ public:
 
         for(char c : s) {
             mp[c]++;
-            if(mp[c] == 2) {   // as soon as frequency reaches 2, return
+            if(mp[c] == 2) {   // as soon as frequency reaches 2,
                 return c;
             }
         }
