@@ -24,7 +24,7 @@ public:
     }
 
     ListNode* sec=head;
-    for(int i=1;i<b+2;i++){
+    for(int i=0;i<b+1;i++){
          sec=sec->next;
     } 
     first->next=head2;
