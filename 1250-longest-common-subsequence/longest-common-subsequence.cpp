@@ -1,27 +1,23 @@
-//T.C : O(m*n)
-//S.C : O(m*n)
-//Approach-1 (Recursion + Memoization)
 class Solution {
 public:
     int t[1001][1001];
-    int LCS(string& s1, string& s2, int m, int n) {
-        if(m == 0 || n == 0)
-            return t[m][n] = 0;
-        
-        if(t[m][n] != -1)
-            return t[m][n];
-        
-        if(s1[m-1] == s2[n-1])
-            return t[m][n] = 1 + LCS(s1, s2, m-1, n-1);
-        
-        return t[m][n] = max(LCS(s1, s2, m, n-1), LCS(s1, s2, m-1, n));
+    int solve(string& s1,string& s2,int i,int j){
+        if(i == 0 || j == 0)
+            return t[i][j] = 0;
+        if(t[i][j]!=-1){
+            return t[i][j];
+        }
+        if(s1[i-1]==s2[j-1]){
+            return t[i][j]= 1+solve(s1,s2,i-1,j-1);
+        }
+        int a=solve(s1,s2,i,j-1);
+        int b=solve(s1,s2,i-1,j);
+        return t[i][j]=max(a,b);
     }
     int longestCommonSubsequence(string text1, string text2) {
-        int m = text1.length();
-        int n = text2.length();
-        
-        memset(t, -1, sizeof(t));
-        
-        return LCS(text1, text2, m, n);
+        int m=text1.length();
+        int n=text2.length();
+       memset(t,-1,sizeof(t));
+       return solve(text1,text2,m,n);
     }
 };
