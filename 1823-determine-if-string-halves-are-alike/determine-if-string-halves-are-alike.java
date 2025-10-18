@@ -1,29 +1,19 @@
 class Solution {
     public boolean halvesAreAlike(String s) {
         int n = s.length();
-        int i = 0;
-        int j = n / 2;
-        int ans = 0, count = 0;
+        int mid = n / 2;
+        int diff = 0;
 
-        // fixed loop condition (was wrong)
-        while (i < n / 2 && j < n) {
-            if (s.charAt(i) == 'a' || s.charAt(i) == 'e' || s.charAt(i) == 'i' || s.charAt(i) == 'o' || s.charAt(i) == 'u' ||
-                s.charAt(i) == 'A' || s.charAt(i) == 'E' || s.charAt(i) == 'I' || s.charAt(i) == 'O' || s.charAt(i) == 'U') {
-                ans++;
-            }
-
-            if (s.charAt(j) == 'a' || s.charAt(j) == 'e' || s.charAt(j) == 'i' || s.charAt(j) == 'o' || s.charAt(j) == 'u' ||
-                s.charAt(j) == 'A' || s.charAt(j) == 'E' || s.charAt(j) == 'I' || s.charAt(j) == 'O' || s.charAt(j) == 'U') {
-                count++;
-            }
-
-            i++;
-            j++;
+        for (int i = 0; i < mid; i++) {
+            if (isVowel(s.charAt(i))) diff++;
+            if (isVowel(s.charAt(i + mid))) diff--;
         }
 
-        if (ans == count)
-            return true;
-        else
-            return false;
+        return diff == 0;
+    }
+
+    private boolean isVowel(char c) {
+        c = Character.toLowerCase(c);
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
     }
 }
