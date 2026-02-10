@@ -11,19 +11,13 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-    // there are two method two solve first is o(n^2)
+    ListNode* slow =head;
+    ListNode* fast=head;
 
-    int count =0;
-    ListNode* temp=head;
-    while(temp!=NULL){
-        count++;
-        temp=temp->next;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
     }  
-    int midi=count/2;
-    ListNode* mid=head;
-    for(int i=1;i<=midi;i++){
-        mid=mid->next;
-    }
-    return mid;
+    return slow;
     }
 };
