@@ -11,22 +11,24 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-    ListNode* temp=head;
-    int count=0;
-    while(temp!=nullptr){
-        count++;
-        temp=temp->next;
-    }   
-     if(n == count){
-            return head->next;
-        }
-    int m=count-n+1;
-    int nth=m-1;
-    temp=head;
-    for(int i=1;i<=nth-1;i++){
-        temp=temp->next;
-    }
-    temp->next=temp->next->next;
-    return head;
+     ListNode* slow=head;
+     ListNode* fast=head;
+
+     for(int i=1;i<=n;i++){
+        // yaha pai hum do bar loop chala nhi sakte hai tho 
+        // gives nullpointer exceptioon so the solve this         
+        fast=fast->next; 
+     }
+
+     if(fast==NULL){
+        return head->next;
+     }
+
+     while(fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next;
+     }
+     slow->next=slow->next->next;
+     return head;
     }
 };
